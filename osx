@@ -8,7 +8,8 @@ function redecho {
 function run {
   # Uncomment for debug all commands
   # echo "   > $*"
-  if $* &>/dev/null; then
+  # if $* &>/dev/null; then
+  if $*; then
     echo '   Done'
   else
     redecho '   FAILED!'
@@ -25,26 +26,53 @@ echo -- Setting up bash profile
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 run cp ${CURRENT_DIR}/bash_profile ~/.bash_profile
 
+echo -- Installing command line tools
+run gcc --version
+
 echo -- Installing Homebrew
-run /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null; then
+ echo '   Done'
+else
+ redecho '   FAILED!'
+fi
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-packages=( postgresql )
+packages=( postgresql node tig )
 for package in "${packages[@]}"; do
-  echo -- Installing $packages
-  run brew instal $package
+ echo -- Installing $packages
+ run brew instal $package
 done
 
-apps=( little-snitch alfred google-chrome dropbox atom appcleaner firefox macpass microsoft-office skype slack spotify mactex transmission vlc )
+apps=( little-snitch alfred google-chrome dropbox atom appcleaner firefox macpass microsoft-office skype slack spotify mactex transmission vlc 1password )
 for app in "${apps[@]}"; do
-  echo -- Installing $app
-  run brew cask instal $app
+ echo -- Installing $app
+ run brew cask instal $app
 done
+
+echo -- Installing RVM with latest ruby
+run \curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+echo -- Install bundler
+run gem install bundler
+
+echo -- Setting OSX settings
+run chflags nohidden ~/Library/
+
+echo -- Give the path to the latest backup......
+read BACKUP_PATH
+
+echo -- Restore old ssh settings
+sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.ssh ~/
+echo '   Done'
+
+echo -- Restore old keychains
+sudo cp -R "$BACKUP_PATH"/Users/`whoami`/Library/Keychains ~/Library
+echo '   Done'
 
 echo -- Manually install
-echo    Matlab
-echo    Mathematica
-echo    Adobe products
+echo '   Matlab'
+echo '   Mathematica'
+echo '   Adobe products'
 
 
 

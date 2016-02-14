@@ -42,7 +42,7 @@ export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
 # Load postgres
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 # Set homebrew api key
 export HOMEBREW_GITHUB_API_TOKEN=012c45e9689f3fbfe4f911bdbc97ceb0a23f1022
