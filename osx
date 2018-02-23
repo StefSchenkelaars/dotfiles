@@ -7,9 +7,9 @@ function redecho {
 
 function run {
   # Uncomment for debug all commands
-  # echo "   > $*"
-  # if $* &>/dev/null; then
+  echo "   > $*"
   if $*; then
+  # if $* &>/dev/null; then
     echo '   Done'
   else
     redecho '   FAILED!'
@@ -22,35 +22,39 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-echo -- Setting up bash profile
+echo -- Setting up profiles
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 run cp ${CURRENT_DIR}/bash_profile ~/.bash_profile
+# run cp ${CURRENT_DIR}/gemrc ~/.gemrc
 
 echo -- Installing command line tools
 run gcc --version
 
 echo -- Installing Homebrew
-if /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null; then
- echo '   Done'
-else
- redecho '   FAILED!'
-fi
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+run /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-packages=( postgresql node tig )
+packages=( htop tig gpg )
 for package in "${packages[@]}"; do
- echo -- Installing $packages
+ echo -- Installing homebrew package $package
  run brew instal $package
 done
 
-apps=( little-snitch alfred google-chrome dropbox atom appcleaner firefox macpass microsoft-office skype slack spotify mactex transmission vlc 1password )
+taps=( caskroom/drivers caskroom/fonts )
+for tap in "${taps[@]}"; do
+ echo -- Installing homebrew tap $tap
+ run brew tap $tap
+done
+
+apps=( little-snitch alfred google-chrome dropbox atom appcleaner firefox microsoft-office skype slack spotify mactex transmission vlc 1password rubymine webstorm wacom-bamboo-tablet font-dejavu-sans-mono-for-powerline font-dejavu-sans font-dejavusansmono-nerd-font-mono font-dejavusansmono-nerd-font caffeine gpg-suite )
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 for app in "${apps[@]}"; do
- echo -- Installing $app
+ echo -- Installing homebrew cask $app
  run brew cask instal $app
 done
 
 echo -- Installing RVM with latest ruby
-run \curl -sSL https://get.rvm.io | bash -s stable --ruby
+run gpg --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 echo -- Install bundler
 run gem install bundler
@@ -61,20 +65,38 @@ run chflags nohidden ~/Library/
 echo -- Give the path to the latest backup......
 read BACKUP_PATH
 
-echo -- Restore old ssh settings
-sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.ssh ~/
-echo '   Done'
+if [ -z "$BACKUP_PATH" ]; then
+  echo 'No path given so not restoring backups'
+else
+  echo -- Restore old ssh settings
+  sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.ssh ~/
+  echo '   Done'
 
-echo -- Restore old keychains
-sudo cp -R "$BACKUP_PATH"/Users/`whoami`/Library/Keychains ~/Library
-echo '   Done'
+  echo -- Restore old keychains
+  sudo cp -R "$BACKUP_PATH"/Users/`whoami`/Library/Keychains ~/Library
+  echo '   Done'
 
-echo -- Manually install
-echo '   Matlab'
-echo '   Mathematica'
-echo '   Adobe products'
+  echo -- Restore old gpg keys
+  sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.gnupg* ~/
+  echo '   Done'
 
+  echo -- Restore git settings
+  sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.git* ~/
+  echo '   Done'
 
+  echo -- Restore aws settings
+  sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.aws ~/
+  echo '   Done'
+
+  # echo -- Restore dropbox
+  # sudo cp -R "$BACKUP_PATH"/Users/`whoami`/Dropbox ~/Dropbox
+  # echo '   Done'
+fi
+
+# Set Alfred to black
+osascript -e 'tell application "Alfred 3" to set theme "Alfred macOS Dark"'
+
+# osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
 
 # ###############################################################################
 # # General UI/UX                                                               #
@@ -114,26 +136,26 @@ echo '   Adobe products'
 #
 # # Disable smart dashes as they’re annoying when typing code
 # defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-#
-# # Disable auto-correct
-# defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-#
-# ###############################################################################
-# # Finder                                                                      #
-# ###############################################################################
-#
+
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
 # # Finder: disable window animations and Get Info animations
 # defaults write com.apple.finder DisableAllAnimations -bool true
-#
-# # Finder: show all filename extensions
-# defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-#
-# # Finder: show status bar
-# defaults write com.apple.finder ShowStatusBar -bool true
-#
-# # When performing a search, search the current folder by default
-# defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-#
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# When performing a search, search the current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
 # # Disable the warning when changing a file extension
 # defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 #
