@@ -15,23 +15,30 @@ else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
+echo '-- Setup Homebrew taps'
+homebrew_taps=(
+  'homebrew/cask-drivers'
+  'homebrew/cask-fonts'
+  'heroku/brew'
+  'thoughtbot/formulae'
+)
+for tap in "${homebrew_taps[@]}"; do
+ brew tap $tap
+done
+
 echo '-- Install Homebrew formulae'
 homebrew_formulae=(
   'htop'
   'tig'
   'gpg'
   'asdf'
+  'reviewdog/tap/reviewdog'
+  'imagemagick'
+  'yarn'
+  'heroku'
+  'parity'
 )
 brew install $( printf "%s " "${homebrew_formulae[@]}" )
-
-echo '-- Setup Homebrew taps'
-homebrew_taps=(
-  'homebrew/cask-drivers'
-  'homebrew/cask-fonts'
-)
-for tap in "${homebrew_taps[@]}"; do
- brew tap $tap
-done
 
 echo '-- Install Homebrew casks'
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -84,6 +91,7 @@ ln -fs ~/Development/dotfiles/git/gitignore ~/.gitignore
 echo '-- Setup asdf'
 asdf plugin add ruby
 asdf plugin add nodejs
+bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
 
 echo '-- Setting OSX settings'
 chflags nohidden ~/Library/
