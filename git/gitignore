@@ -16,3 +16,6 @@ Thumbs.db
 # Ignore RubyMine IDE stuff
 .idea
 .idea/
+
+# Ignore the asdf tool versions
+.tool-versions
