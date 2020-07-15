@@ -71,6 +71,7 @@ homebrew_casks=(
   'time-out'
   'zeplin'
   'zoomus'
+  'scroll-reverser'
 )
 brew cask install $( printf "%s " "${homebrew_casks[@]}" )
 
