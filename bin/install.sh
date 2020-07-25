@@ -3,7 +3,8 @@
 echo '-- Give your admin password to start the installation'
 # Ask for the administrator password upfront
 sudo -v
-# Keep-alive: update existing `sudo` time stamp until `old_osx_script` has finished
+
+# Keep-alive: update existing `sudo` time stamp until script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo '-- Checking for homebrew'
@@ -37,6 +38,9 @@ homebrew_formulae=(
   'yarn'
   'heroku'
   'parity'
+  'wxmac'
+  'autoconf'
+  'fop'
 )
 brew install $( printf "%s " "${homebrew_formulae[@]}" )
 
@@ -72,6 +76,7 @@ homebrew_casks=(
   'zeplin'
   'zoomus'
   'scroll-reverser'
+  'java'
 )
 brew cask install $( printf "%s " "${homebrew_casks[@]}" )
 
@@ -89,10 +94,20 @@ echo '-- Symlink the dotfiles'
 ln -fs ~/Development/dotfiles/shell/zshrc ~/.zshrc
 ln -fs ~/Development/dotfiles/git/gitignore ~/.gitignore
 
-echo '-- Setup asdf'
+echo '-- Setup ruby with asdf'
 asdf plugin add ruby
+asdf install ruby latest
+
+echo '-- Setup nodejs with asdf'
 asdf plugin add nodejs
 bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
+asdf install nodejs latest
+
+echo '-- Setup elixir with asdf'
+asdf plugin add erlang
+asdf install erlang latest
+asdf plugin add elixir
+asdf install elixir latest
 
 echo '-- Setting OSX settings'
 chflags nohidden ~/Library/
