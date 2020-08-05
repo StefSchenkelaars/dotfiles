@@ -77,6 +77,7 @@ homebrew_casks=(
   'zoomus'
   'scroll-reverser'
   'java'
+  'garmin-express'
 )
 brew cask install $( printf "%s " "${homebrew_casks[@]}" )
 
