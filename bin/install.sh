@@ -20,6 +20,7 @@ echo '-- Setup Homebrew taps'
 homebrew_taps=(
   'homebrew/cask-drivers'
   'homebrew/cask-fonts'
+  'homebrew/cask-versions'
   'heroku/brew'
   'thoughtbot/formulae'
 )
@@ -79,6 +80,7 @@ homebrew_casks=(
   'scroll-reverser'
   'java'
   'garmin-express'
+  'google-chrome-canary'
 )
 brew cask install $( printf "%s " "${homebrew_casks[@]}" )
 
