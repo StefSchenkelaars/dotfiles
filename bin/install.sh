@@ -41,6 +41,7 @@ homebrew_formulae=(
   'wxmac'
   'autoconf'
   'fop'
+  'letsencrypt'
 )
 brew install $( printf "%s " "${homebrew_formulae[@]}" )
 
