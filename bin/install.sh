@@ -84,6 +84,7 @@ homebrew_casks=(
   'garmin-express'
   'google-chrome-canary'
   'ngrok'
+  'clipgrab'
 )
 brew cask install $( printf "%s " "${homebrew_casks[@]}" )
 
