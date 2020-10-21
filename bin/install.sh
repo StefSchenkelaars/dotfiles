@@ -66,7 +66,6 @@ homebrew_casks=(
   'vlc'
   '1password'
   'rubymine'
-  'webstorm'
   'wacom-tablet'
   'caffeine'
   'gpg-suite'
