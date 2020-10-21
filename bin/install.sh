@@ -43,6 +43,7 @@ homebrew_formulae=(
   'autoconf'
   'fop'
   'letsencrypt'
+  'watchman'
 )
 brew install $( printf "%s " "${homebrew_formulae[@]}" )
 
