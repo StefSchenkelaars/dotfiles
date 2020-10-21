@@ -44,6 +44,7 @@ homebrew_formulae=(
   'fop'
   'letsencrypt'
   'watchman'
+  'awscli'
 )
 brew install $( printf "%s " "${homebrew_formulae[@]}" )
 
