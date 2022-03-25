@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git heroku terraform dotenv)
+plugins=(git heroku dotenv asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,6 +97,3 @@ export LANG=en_US.UTF-8
 #
 # Example aliases
 alias dev="cd ~/Development"
-alias rvs="cd ~/Development/RoeierVolgSysteem"
-alias drieam="cd ~/Development/Drieam/"
-alias eduframe="cd ~/Development/Drieam/EduFrame/EduFrame/"
