@@ -24,8 +24,8 @@ else
   sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.gnupg* ~/
   echo '   Done'
 
-  echo -- Restore git settings
-  sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.git* ~/
+  echo -- Restore gitconfig
+  sudo cp -R "$BACKUP_PATH"/Users/`whoami`/.gitconfig ~/
   echo '   Done'
 
   echo -- Restore aws settings

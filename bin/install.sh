@@ -13,17 +13,15 @@ then
   echo '   Ok'
 else
   echo '   Installing homebrew'
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 echo '-- Setup Homebrew taps'
 homebrew_taps=(
   'homebrew/cask-drivers'
   'homebrew/cask-fonts'
-  'homebrew/cask-versions'
   'heroku/brew'
   'thoughtbot/formulae'
-  'hashicorp/tap'
 )
 for tap in "${homebrew_taps[@]}"; do
  brew tap $tap
@@ -35,65 +33,41 @@ homebrew_formulae=(
   'act'
   'adobe-acrobat-reader'
   'alfred'
-  'android-studio'
   'appcleaner'
   'asdf'
-  'atom'
-  'autoconf'
   'awscli'
-  'browserstacklocal'
   'caffeine'
-  'certbot'
   'clipgrab'
   'cmake'
+  'curl'
   'docker'
   'dropbox'
   'firefox'
-  'fop'
+  'ffmpeg'
   'gcc'
   'google-chrome'
-  'google-chrome-canary'
-  'google-drive'
-  'google-drive-file-stream'
-  'gpg'
-  'gpg-suite'
-  'hashicorp/tap/terraform'
   'heroku'
   'htop'
-  'imagemagick'
-  'java'
-  'letsencrypt'
-  'libsodium'
   'little-snitch'
-  'mactex'
   'microsoft-office'
   'microsoft-teams'
   'mysql'
   'ngrok'
   'parity'
-  'poppler'
-  'postgres'
   'postgres-unofficial'
   'postman'
   'redis'
   'reviewdog/tap/reviewdog'
   'rubymine'
-  'scroll-reverser'
   'skype'
   'slack'
   'spotify'
   'tig'
-  'time-out'
   'transmission'
-  'visual-studio'
   'vlc'
   'watchman'
   'wget'
   'wireshark'
-  'wxmac'
-  'xmlsec1'
-  'yarn'
-  'zeplin'
   'zoom'
 )
 
@@ -127,6 +101,11 @@ asdf plugin add erlang
 asdf install erlang latest
 asdf plugin add elixir
 asdf install elixir latest
+
+echo '-- Setup yarn with asdf'
+asdf plugin add yarn
+asdf install yarn latest
+asdf global yarn latest
 
 echo '-- Setting OSX settings'
 chflags nohidden ~/Library/
