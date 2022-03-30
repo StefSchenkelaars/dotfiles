@@ -80,6 +80,10 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+# Ensure GPG signing works as expected.
+# See https://github.com/keybase/keybase-issues/issues/2798
+export GPG_TTY=$(tty)
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -96,4 +100,4 @@ export LANG=en_US.UTF-8
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias dev="cd ~/Development"
+alias dev="cd ~/Documents/Development"
