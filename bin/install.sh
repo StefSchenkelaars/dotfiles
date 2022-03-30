@@ -19,7 +19,6 @@ fi
 echo '-- Setup Homebrew taps'
 homebrew_taps=(
   'homebrew/cask-drivers'
-  'homebrew/cask-fonts'
   'heroku/brew'
   'thoughtbot/formulae'
 )
@@ -40,11 +39,12 @@ homebrew_formulae=(
   'clipgrab'
   'cmake'
   'curl'
-  'docker'
+  'homebrew/cask/docker'
   'dropbox'
   'firefox'
   'ffmpeg'
   'gcc'
+  'gnupg'
   'google-chrome'
   'heroku'
   'htop'
@@ -63,11 +63,11 @@ homebrew_formulae=(
   'slack'
   'spotify'
   'tig'
-  'transmission'
+  'homebrew/cask/transmission'
   'vlc'
   'watchman'
   'wget'
-  'wireshark'
+  'homebrew/cask/wireshark'
   'zoom'
 )
 
