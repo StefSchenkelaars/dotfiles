@@ -5,6 +5,11 @@
     enable = true;
     userName = "Stef Schenkelaars";
     userEmail = "stef.schenkelaars@gmail.com";
+    extraConfig = {
+      core = {
+        autocrlf = false;
+      };
+    };
     ignores = [
       # Compiled Python files
       "*.pyc"
