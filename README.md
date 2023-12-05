@@ -6,12 +6,12 @@ My OS X dotfiles.
 
 ### Mac
 ```bash
-$ bash -c "$(curl -fsSL raw.github.com/stefschenkelaars/dotfiles/master/bin/install_mac.sh)"
+bash -c "$(curl -fsSL raw.github.com/stefschenkelaars/dotfiles/master/bin/install_mac.sh)"
 ```
 
 ### Linux
 ```bash
-$ bash -c "$(curl -fsSL raw.github.com/stefschenkelaars/dotfiles/master/bin/install_linux.sh)"
+bash -c "$(curl -fsSL raw.github.com/stefschenkelaars/dotfiles/master/bin/install_linux.sh)"
 ```
 
 ## Acknowledgements

@@ -20,6 +20,7 @@ then
 else
   echo '   Installing NixOS'
   curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+  . ~/.nix-profile/etc/profile.d/nix.sh
 fi
 
 echo '-- Checking for NixOS home manager'
@@ -39,3 +40,6 @@ ln -s ~/dotfiles/home-manager ~/.config/home-manager
 
 echo '-- Running home manager'
 home-manager switch
+
+echo '-- Starting new bash terminal to reload profile'
+exec bash

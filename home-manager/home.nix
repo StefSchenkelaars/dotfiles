@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -35,8 +35,11 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    pkgs.nerdfonts
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     pkgs.tig
+    (pkgs.lunarvim.override { globalConfig = ''
+      -- Additional config by home-manager
+    ''; })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -58,7 +61,6 @@
   imports = [
     ./packages/direnv.nix
     ./packages/git.nix
-    ./packages/nvim.nix
     ./packages/tmux.nix
     ./packages/zsh.nix
   ];
@@ -74,7 +76,7 @@
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "lvim";
   };
 
   # Let Home Manager install and manage itself.
