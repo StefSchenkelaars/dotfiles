@@ -40,6 +40,7 @@
     (pkgs.lunarvim.override { globalConfig = ''
       -- Additional config by home-manager
     ''; })
+    pkgs.unzip
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
