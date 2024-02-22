@@ -35,8 +35,8 @@ homebrew_formulae=(
   'appcleaner'
   'asdf'
   'awscli'
+  'homebrew/cask/balenaetcher'
   'caffeine'
-  'clipgrab'
   'cmake'
   'curl'
   'homebrew/cask/docker'
@@ -48,44 +48,48 @@ homebrew_formulae=(
   'google-chrome'
   'heroku'
   'htop'
+  'jpadilla-redis'
   'little-snitch'
+  'mactex'
   'microsoft-office'
   'microsoft-teams'
   'mysql'
   'ngrok'
   'parity'
+  'plex-media-server'
   'postgres-unofficial'
   'postman'
   'redis'
   'reviewdog/tap/reviewdog'
-  'rubymine'
+  'scroll-reverser'
+  'shared-mime-info'
   'skype'
-  'slack'
   'spotify'
+  'teamviewer'
   'tig'
   'homebrew/cask/transmission'
   'vlc'
+  'visual-studio-code'
+  'wacom-tablet'
   'watchman'
   'wget'
   'homebrew/cask/wireshark'
-  'zoom'
 )
 
 brew install $( printf "%s " "${homebrew_formulae[@]}" )
 
 echo '-- Clone repo into Development folder'
-if [ ! -d ~/Documents/Development/dotfiles ]
+if [ ! -d ~/dotfiles ]
 then
-  mkdir -p ~/Documents/Development/
-  git clone https://github.com/StefSchenkelaars/dotfiles.git ~/Documents/Development/dotfiles
+  git clone https://github.com/StefSchenkelaars/dotfiles.git ~/dotfiles
 fi
 
 echo '-- Install Oh My ZSH'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo '-- Symlink the dotfiles'
-ln -fs ~/Documents/Development/dotfiles/shell/zshrc ~/.zshrc
-ln -fs ~/Documents/Development/dotfiles/git/gitignore ~/.gitignore
+ln -fs ~/dotfiles/shell/zshrc ~/.zshrc
+ln -fs ~/dotfiles/git/gitignore ~/.gitignore
 
 echo '-- Setup ruby with asdf'
 asdf plugin add ruby

@@ -1,6 +1,9 @@
 echo 'Removing node_modules'
 find ~/Development -name "node_modules" -type d -prune -exec rm -rf '{}' +
 
+echo 'Removing .angular cache folders'
+find ~/Development -name ".angular" -type d -prune -exec rm -rf '{}' +
+
 echo 'Removing logs'
 find ~/Development -type f -name "*.log" -delete
 
